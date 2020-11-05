@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_bg"
-    tools:context=".activities.SingUpActivity">
+    tools:context=".activities.SignUpActivity">
     
     <LinearLayout
         android:id="@+id/layoutHeader"
@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:fontFamily="@font/ubuntu_bold"
             android:includeFontPadding="false"
-            android:text="@string/sing_up"
+            android:text="@string/sign_up"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/colorTextIcons"/>
     </LinearLayout>
@@ -79,7 +79,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:includeFontPadding="false"
-                        android:text="First Name"
+                        android:text="@string/first_name"
                         android:fontFamily="@font/ubuntu_regular"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/_11sdp"/>
@@ -108,7 +108,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:includeFontPadding="false"
-                        android:text="Last Name"
+                        android:text="@string/last_name"
                         android:fontFamily="@font/ubuntu_regular"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/_11sdp"/>
@@ -193,7 +193,7 @@
                         android:layout_marginStart="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_8sdp"
                         android:includeFontPadding="false"
-                        android:text="Confirm Password"
+                        android:text="@string/confirm_password"
                         android:fontFamily="@font/ubuntu_regular"
                         android:textColor="@color/colorPrimaryText"
                         android:textSize="@dimen/_11sdp"/>
@@ -232,12 +232,12 @@
                     android:fontFamily="@font/ubuntu_bold"
                     android:includeFontPadding="false"
                     android:textSize="@dimen/_14ssp"
-                    android:text="@string/sing_up"
+                    android:text="@string/sign_up"
                     android:backgroundTint="@color/colorPrimary"
-                    app:layout_constraintTop_toBottomOf="@id/cardSingIn"/>
+                    app:layout_constraintTop_toBottomOf="@id/cardSignIn"/>
 
                 <ProgressBar
-                    android:id="@+id/singUpProgressBar"
+                    android:id="@+id/signUpProgressBar"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_gravity="center"
@@ -255,9 +255,9 @@
                 android:textColor="@color/colorHintText"
                 android:textSize="@dimen/_14ssp"
                 android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/buttonSingIn"/>
+                app:layout_constraintTop_toBottomOf="@id/buttonSignIn"/>
             <TextView
-                android:id="@+id/textSingIn"
+                android:id="@+id/textSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_20sdp"
@@ -265,7 +265,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:padding="@dimen/_6sdp"
-                android:text="@string/sing_in"
+                android:text="@string/sign_in"
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/colorAccent"
                 android:textAllCaps="true"

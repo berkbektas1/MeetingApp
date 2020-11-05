@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_bg"
-    tools:context=".activities.SingInActivity">
+    tools:context=".activities.SignInActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,10 +39,10 @@
                 />
         </LinearLayout>
         <TextView
-            android:id="@+id/textSingInLabel"
+            android:id="@+id/textSignInLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sing_in_to_your_account"
+            android:text="@string/sign_in_to_your_account"
             android:layout_marginTop="@dimen/_15sdp"
             android:includeFontPadding="false"
             android:fontFamily="@font/ubuntu_regular"
@@ -53,14 +53,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardSingIn"
+            android:id="@+id/cardSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             app:cardCornerRadius="@dimen/_4sdp"
-            app:layout_constraintTop_toBottomOf="@id/textSingInLabel">
+            app:layout_constraintTop_toBottomOf="@id/textSignInLabel">
             
             <LinearLayout
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonSingIn"
+            android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_20sdp"
@@ -137,20 +137,31 @@
             android:fontFamily="@font/ubuntu_bold"
             android:includeFontPadding="false"
             android:textSize="@dimen/_14ssp"
-            android:text="@string/sing_in"
+            android:text="@string/sign_in"
             android:backgroundTint="@color/colorPrimary"
-            app:layout_constraintTop_toBottomOf="@id/cardSingIn"/>
+            app:layout_constraintTop_toBottomOf="@id/cardSignIn"/>
+
+        <ProgressBar
+            android:id="@+id/signInProgressBar"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonSignIn"
+            app:layout_constraintEnd_toEndOf="@id/buttonSignIn"
+            app:layout_constraintStart_toStartOf="@id/buttonSignIn"
+            app:layout_constraintTop_toTopOf="@+id/buttonSignIn"
+            />
         <TextView
             android:id="@+id/textNoAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/ubuntu_regular"
-            android:text="Don't have an account?"
+            android:text="@string/don_t_have_an_account"
             android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/_13ssp"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/buttonSingIn"/>
+            app:layout_constraintTop_toBottomOf="@id/buttonSignIn"/>
         <TextView
             android:id="@+id/textSingUp"
             android:layout_width="match_parent"
@@ -160,7 +171,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:padding="@dimen/_6sdp"
-            android:text="@string/sing_up"
+            android:text="@string/sign_up"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/colorAccent"
             android:textAllCaps="true"

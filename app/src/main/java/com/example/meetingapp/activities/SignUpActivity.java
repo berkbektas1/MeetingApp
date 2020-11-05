@@ -24,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 
-public class SingUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private TextView textSingIn;
     private ImageView imageBack;
@@ -38,13 +38,13 @@ public class SingUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sing_up);
+        setContentView(R.layout.activity_sign_up);
 
         // preference instance
         preferenceManager = new PreferenceManager(getApplicationContext());
 
 
-        textSingIn = findViewById(R.id.textSingIn);
+        textSingIn = findViewById(R.id.textSignIn);
         imageBack = findViewById(R.id.imageBack);
 
         inputFirstName = findViewById(R.id.inputFirstName);
@@ -53,7 +53,7 @@ public class SingUpActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
         buttonSingUp = findViewById(R.id.buttonSingUp);
-        singUpProgressBar = findViewById(R.id.singUpProgressBar);
+        singUpProgressBar = findViewById(R.id.signUpProgressBar);
 
         textSingIn.setOnClickListener(v -> onBackPressed());
         imageBack.setOnClickListener(v -> onBackPressed());
@@ -62,19 +62,19 @@ public class SingUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (inputFirstName.getText().toString().trim().isEmpty()){
-                    Toast.makeText(SingUpActivity.this, "Enter first name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Enter first name", Toast.LENGTH_SHORT).show();
                 }else if (inputLastName.getText().toString().trim().isEmpty()){
-                    Toast.makeText(SingUpActivity.this, "Enter last name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Enter last name", Toast.LENGTH_SHORT).show();
                 }else if (inputEmail.getText().toString().trim().isEmpty()){
-                    Toast.makeText(SingUpActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"Enter email", Toast.LENGTH_SHORT).show();
                 }else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail.getText().toString()).matches()){
-                    Toast.makeText(SingUpActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Enter valid email", Toast.LENGTH_SHORT).show();
                 }else if (inputPassword.getText().toString().trim().isEmpty()){
-                    Toast.makeText(SingUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                 }else if(inputConfirmPassword.getText().toString().trim().isEmpty()){
-                    Toast.makeText(SingUpActivity.this, "Confirm your password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Confirm your password", Toast.LENGTH_SHORT).show();
                 }else if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())){
-                    Toast.makeText(SingUpActivity.this, "Password and Confirm Password must be same.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Password and Confirm Password must be same.", Toast.LENGTH_SHORT).show();
                 }else {
                     singUp();
                 }
@@ -115,7 +115,7 @@ public class SingUpActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         singUpProgressBar.setVisibility(View.INVISIBLE);
                         buttonSingUp.setVisibility(View.VISIBLE);
-                        Toast.makeText(SingUpActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 
                 }
         });
