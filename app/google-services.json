@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "421854096120",
+    "firebase_url": "https://meeting-app-c270e.firebaseio.com",
+    "project_id": "meeting-app-c270e",
+    "storage_bucket": "meeting-app-c270e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421854096120:android:6b6396277c0410e8cf290d",
+        "android_client_info": {
+          "package_name": "com.example.meetingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421854096120-87pbl67ouha6cdro4q2bq6846ptt8bgk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqiJ8aysssKLgsEhlJbWSYGDXdFW6pk8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421854096120-87pbl67ouha6cdro4q2bq6846ptt8bgk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

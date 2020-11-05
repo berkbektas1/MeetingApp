@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Meeting App</string>
+    <string name="welcome_to">Welcome To</string>
+    <string name="sing_in_to_your_account">Sing in to your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_hint">• • • • • •</string>
+    <string name="sing_in">SING IN</string>
+    <string name="sing_up">Sing Up</string>
+    <string name="youremail_example_com">youremail@example.com</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up_to_hold_video_conferences_and_meetings">Sign up to hold video conferences and meetings</string>
+</resources>
