@@ -219,18 +219,32 @@
 
             </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonSingUp"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:fontFamily="@font/ubuntu_bold"
-                android:includeFontPadding="false"
-                android:textSize="@dimen/_14ssp"
-                android:text="@string/sing_up"
-                android:backgroundTint="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@id/cardSingIn"/>
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonSingUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:includeFontPadding="false"
+                    android:textSize="@dimen/_14ssp"
+                    android:text="@string/sing_up"
+                    android:backgroundTint="@color/colorPrimary"
+                    app:layout_constraintTop_toBottomOf="@id/cardSingIn"/>
+
+                <ProgressBar
+                    android:id="@+id/singUpProgressBar"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
+
+            </FrameLayout>
+
 
             <TextView
                 android:layout_width="match_parent"

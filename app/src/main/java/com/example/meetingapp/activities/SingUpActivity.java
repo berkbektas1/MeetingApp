@@ -1,17 +1,28 @@
 package com.example.meetingapp.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meetingapp.R;
+import com.example.meetingapp.utilities.Constants;
+import com.example.meetingapp.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class SingUpActivity extends AppCompatActivity {
 
@@ -19,11 +30,18 @@ public class SingUpActivity extends AppCompatActivity {
     private ImageView imageBack;
     private EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputConfirmPassword;
     private MaterialButton buttonSingUp;
+    private ProgressBar singUpProgressBar;
+
+    //MyClass PreferenceManager
+    private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
+
+        // preference instance
+        preferenceManager = new PreferenceManager(getApplicationContext());
 
 
         textSingIn = findViewById(R.id.textSingIn);
@@ -35,6 +53,7 @@ public class SingUpActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
         buttonSingUp = findViewById(R.id.buttonSingUp);
+        singUpProgressBar = findViewById(R.id.singUpProgressBar);
 
         textSingIn.setOnClickListener(v -> onBackPressed());
         imageBack.setOnClickListener(v -> onBackPressed());
@@ -57,7 +76,7 @@ public class SingUpActivity extends AppCompatActivity {
                 }else if (!inputPassword.getText().toString().equals(inputConfirmPassword.getText().toString())){
                     Toast.makeText(SingUpActivity.this, "Password and Confirm Password must be same.", Toast.LENGTH_SHORT).show();
                 }else {
-
+                    singUp();
                 }
             }
         });
@@ -66,6 +85,40 @@ public class SingUpActivity extends AppCompatActivity {
 
 
     private void singUp(){
+        buttonSingUp.setVisibility(View.INVISIBLE);
+        singUpProgressBar.setVisibility(View.VISIBLE);
+
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        HashMap<String, Object> user = new HashMap<>();
+        user.put(Constants.KEY_FIRST_NAME, inputFirstName.getText().toString());
+        user.put(Constants.KEY_LAST_NAME, inputLastName.getText().toString());
+        user.put(Constants.KEY_EMAIL, inputEmail.getText().toString());
+        user.put(Constants.KEY_PASSWORD, inputPassword.getText().toString());
+        
+        database.collection(Constants.KEY_COLLECTION_USERS)
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        // Is signed in true and users information received
+                       preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                       preferenceManager.putString(Constants.KEY_FIRST_NAME, inputFirstName.getText().toString());
+                       preferenceManager.putString(Constants.KEY_LAST_NAME, inputLastName.getText().toString());
+                       preferenceManager.putString(Constants.KEY_EMAIL, inputEmail.getText().toString());
+
+                       Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       startActivity(intent);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        singUpProgressBar.setVisibility(View.INVISIBLE);
+                        buttonSingUp.setVisibility(View.VISIBLE);
+                        Toast.makeText(SingUpActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                
+                }
+        });
 
 
     }
