@@ -102,6 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         // Is signed in true and users information received
                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true);
+                       preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                        preferenceManager.putString(Constants.KEY_FIRST_NAME, inputFirstName.getText().toString());
                        preferenceManager.putString(Constants.KEY_LAST_NAME, inputLastName.getText().toString());
                        preferenceManager.putString(Constants.KEY_EMAIL, inputEmail.getText().toString());
