@@ -1,19 +1,24 @@
 package com.example.meetingapp.activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meetingapp.R;
 import com.example.meetingapp.adapters.UsersAdapter;
+import com.example.meetingapp.listeners.UsersListener;
 import com.example.meetingapp.models.User;
 import com.example.meetingapp.utilities.Constants;
 import com.example.meetingapp.utilities.PreferenceManager;
@@ -33,13 +38,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements UsersListener {
     private PreferenceManager preferenceManager;
     private TextView textTitle, textSignOut;
     private List<User> users;
     private UsersAdapter usersAdapter;
     private TextView textErrorMessage;
-    private ProgressBar usersProgressBar;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView usersRecyclerView = findViewById(R.id.usersRecyclerView);
         textErrorMessage = findViewById(R.id.textErrorMessage);
-        usersProgressBar = findViewById(R.id.usersProgressBar);
+
 
         //user model instance
         users = new ArrayList<>();
-        usersAdapter = new UsersAdapter(users);
+        usersAdapter = new UsersAdapter(users, this);
         usersRecyclerView.setAdapter(usersAdapter);
+
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(this::getUsers); // getUsers methodunu dinle
 
         getUsers();
 
@@ -89,16 +97,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUsers(){
-        usersProgressBar.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         database.collection(Constants.KEY_COLLECTION_USERS)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        usersProgressBar.setVisibility(View.GONE);
+                        swipeRefreshLayout.setRefreshing(false); // refresh stop
                         String myUserId = preferenceManager.getString(Constants.KEY_USER_ID);
                         if (task.isSuccessful() && task.getResult() != null) {
+                            users.clear();
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()){
                                 if (myUserId.equals(documentSnapshot.getId())){
                                     // except current user
@@ -169,6 +178,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // implement method UserListener
+
+    @Override
+    public void initiateVideoMeeting(User user) {
+        if (user.token == null || user.token.trim().isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("Video Call");
+            builder.setMessage(user.firstName+ " " + user.lastName + " is not online.");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.show();
+        }else{
+            Toast.makeText(this, "Video meeting with " + user.firstName+ " " + user.lastName, Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
+    @Override
+    public void initiateAudioMeeting(User user) {
+        if (user.token == null || user.token.trim().isEmpty()){
+            Toast.makeText(this, user.firstName+ " " + user.lastName + " is not online.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Audio meeting with " + user.firstName+ " " + user.lastName, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

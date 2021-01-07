@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meetingapp.R;
+import com.example.meetingapp.listeners.UsersListener;
 import com.example.meetingapp.models.User;
 
 import java.util.List;
@@ -17,9 +18,11 @@ import java.util.List;
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder>{
 
     private List<User> users;
+    private UsersListener usersListener;
 
-    public UsersAdapter(List<User> users) {
+    public UsersAdapter(List<User> users, UsersListener usersListener) {
         this.users = users;
+        this.usersListener = usersListener;
     }
 
     @NonNull
@@ -44,7 +47,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         return users.size();
     }
 
-    static class UserViewHolder extends RecyclerView.ViewHolder{
+    class UserViewHolder extends RecyclerView.ViewHolder{
 
         TextView textFirstChar, textUsername, textEmail;
         ImageView imageAudioMeeting, imageVideoMeeting;
@@ -60,10 +63,26 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
 
         }
 
-        void setUserData(User user) { // User models
+        void setUserData(User user) { // kullanıcı verilerini ayarlar User models kullanır
              textFirstChar.setText(user.firstName.substring(0, 1));
              textUsername.setText(String.format("%s %s", user.firstName, user.lastName));
              textEmail.setText(user.email);
+
+             // Audio image a basıldığında
+             imageAudioMeeting.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                    usersListener.initiateAudioMeeting(user);// hangi user tıkladı
+                 }
+             });
+             // Video Call için api servis isteği
+            imageVideoMeeting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    usersListener.initiateVideoMeeting(user);
+                }
+            });
+
         }
 
 

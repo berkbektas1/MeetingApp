@@ -32,7 +32,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:fontFamily="@font/ubuntu_bold"
             android:includeFontPadding="false"
-            android:text="@string/sign_up"
+            android:text="@string/sign_in"
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/colorTextIcons"/>
     </LinearLayout>
