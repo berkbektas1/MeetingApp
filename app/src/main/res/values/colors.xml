@@ -11,6 +11,7 @@
     <color name="colorTextIcons">#FFFFFF</color>
     <color name="colorBackground">#FAFAFA</color>
     <color name="colorHintText">#BDBDBD</color>
-
-
+    <color name="colorMeetingInvitationStart">#D0811E1E</color>
+    <color name="colorMeetingInvitationCenter">#323131</color>
+    <color name="colorMeetingInvitationEnd">#CD296014</color>
 </resources>
