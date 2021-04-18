@@ -194,7 +194,12 @@ public class MainActivity extends AppCompatActivity implements UsersListener {
             });
             builder.show();
         }else{
-            Toast.makeText(this, "Video meeting with " + user.firstName+ " " + user.lastName, Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(getApplicationContext(), OutgoingInvitationActivity.class);
+            intent.putExtra("user", user);
+            intent.putExtra("type", "video");
+            startActivity(intent);
+
         }
     }
 

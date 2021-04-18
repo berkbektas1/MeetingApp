@@ -16,4 +16,5 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sing_out">Sign Out</string>
     <string name="invitation">Invitation</string>
+    <string name="sending_meeting_invitation">Sending Meeting Invitation</string>
 </resources>
